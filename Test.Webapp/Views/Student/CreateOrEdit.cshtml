@@ -1,0 +1,63 @@
+﻿@model Test.Webapp.ViewModel.StudentVm
+
+@{
+    ViewData["Title"] = "CreateOrEdit";
+}
+
+
+
+<h1 class="text-center">Registration</h1>
+<hr />
+<div class="container">
+
+
+        <form asp-action="CreateOrEdit" asp-controller="Student" method="post" enctype="multipart/form-data">
+        <div class="row border-2">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="col-md-6">
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+        <div class="col-md-6">
+                <label asp-for="Email" class="control-label"></label>
+                <input asp-for="Email" class="form-control" />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+        <div class="col-md-6">
+                <label asp-for="Phone" class="control-label"></label>
+                <input asp-for="Phone" class="form-control" />
+                <span asp-validation-for="Phone" class="text-danger"></span>
+            </div>
+        <div class="col-md-6">
+                <label asp-for="RegistrationId" class="control-label"></label>
+                <input asp-for="RegistrationId" class="form-control" />
+                <span asp-validation-for="RegistrationId" class="text-danger"></span>
+            </div>
+        <div class="col-md-12">
+                <label asp-for="Address" class="control-label"></label>
+                <textarea asp-for="Address" class="form-control" rows="6"></textarea>
+                <span asp-validation-for="Address" class="text-danger"></span>
+            </div>
+        <div class="col-md-12">
+                <label asp-for="Image" class="control-label">Image</label>
+                <input type="File"name="photo" asp-for="Image" class="form-control" />
+                <span asp-validation-for="Image" class="text-danger"></span>
+            </div>
+ 
+        
+            <div class="form-group mt-3">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </div>
+
+        </form>
+
+</div>
+<div>
+    <a asp-action="Index" class="btn btn-sm btn-outline-danger mt-3">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

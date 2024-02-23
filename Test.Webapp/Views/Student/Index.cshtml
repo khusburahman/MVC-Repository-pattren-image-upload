@@ -1,0 +1,71 @@
+﻿@model IEnumerable<Test.Webapp.ViewModel.StudentVm>
+
+@{
+    ViewData["Title"] = "Index";
+    int IdNo = 1;
+}
+
+<h1 class="text-center">Student List</h1>
+<hr />
+
+<p>
+    <a asp-action="CreateOrEdit" class="btn btn-sm btn-secondary">Create New</a>
+</p>
+<table class="table table-responsive table-bordered bg-info">
+    <thead class="border-2">
+        <tr>
+            <th class="text-center">#</th>
+            <th class="text-center">
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th class="text-center">
+                @Html.DisplayNameFor(model => model.Email)
+            </th>
+            <th class="text-center">
+                @Html.DisplayNameFor(model => model.Phone)
+            </th>
+            <th class="text-center">
+                @Html.DisplayNameFor(model => model.RegistrationId)
+            </th>
+            <th class="text-center">
+                @Html.DisplayNameFor(model => model.Address)
+            </th>
+            <th class="text-center">Image</th>
+            <th class="text-center">Action</th>
+       
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>@IdNo</td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Email)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Phone)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RegistrationId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Address)
+            </td>
+             <td>
+                    <img class="img-thumbnail"width="50" src="~/images/student/@item.Image" />
+             </td>
+              
+ 
+            <td>
+                <a asp-action="CreateOrEdit" asp-controller="Student" class="btn btn-sm btn-primary" asp-route-id="@item.Id">Edit</a> |
+                <a asp-action="Details" asp-controller="Student" class="btn btn-sm btn-success" asp-route-id="@item.Id">Details</a> |
+                <a asp-action="Delete" onclick="return confirm('Are you sure delete this item!')" asp-controller="Student" class="btn btn-sm btn-danger mb-0" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+        IdNo++;
+}
+    </tbody>
+</table>
