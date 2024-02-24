@@ -27,15 +27,19 @@ public class RepositoryService<TEntity, IModel> : IRepositoryService<TEntity, IM
         }
         DbSet.Remove(entity);
         await dbContext.SaveChangesAsync(cancellationToken);
-        var deleteModel=_mapper.Map<TEntity,IModel>(entity);
+
+        var deleteModel=_mapper.Map<IModel>(entity);
+
         return deleteModel;
     }
 
     public async Task<IEnumerable<IModel>> GetAllAsync(CancellationToken cancellationToken)
     {
-        var entites = await DbSet.Where(x=>!x.IsDelete) .ToListAsync(cancellationToken);
+        var entites = await DbSet.Where(x=>!x.IsDelete).ToListAsync(cancellationToken);
         if (entites == null) return null;
+
         var data = _mapper.Map<IEnumerable<IModel>>(entites);
+
         return data;
     }
 
@@ -50,6 +54,7 @@ public class RepositoryService<TEntity, IModel> : IRepositoryService<TEntity, IM
     public async Task<IModel> InsertAsync(IModel model, CancellationToken cancellationToken)
     {
         var entity = _mapper.Map<TEntity>(model);
+
          entity.CreateDate = DateTime.Now;
 
         DbSet.Add(entity);

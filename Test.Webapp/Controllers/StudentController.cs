@@ -15,6 +15,7 @@ public class StudentController : Controller
     }
     public async Task<ActionResult<StudentVm>> Index(CancellationToken cancellationToken)
     {
+        
         return View(await studentRepository.GetAllAsync(cancellationToken));
     }
     public async Task<ActionResult<StudentVm>> CreateOrEdit(long id, CancellationToken cancellationToken)
